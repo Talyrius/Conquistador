@@ -1,0 +1,24 @@
+## Interface: 40200
+
+## Title: Conquistador
+## Notes: Calculates your Conquest Points cap.
+## Author: GameMaster128
+## Version: @project-version@
+## X-Date: @project-date-iso@
+## X-Copyright: Copyright © 2011 GameMaster128
+## X-License: All Rights Reserved
+## X-Website: http://wow.curseforge.com/addons/conquistador/
+## X-WoWI-ID: 17308
+## X-Category: PvP, Arena, Battlegrounds
+## X-Icon: Interface\Icons\PVPCurrency-Conquest-Horde
+
+## SavedVariablesPerCharacter: ConquistadorDBPC
+
+## LoadManagers: AddonLoader
+## X-LoadOn-Execute: CreateFrame("Frame", nil, PVPFrame):SetScript("OnShow", function(self) LoadAddOn("Conquistador"); self:SetScript("OnShow", nil) end)
+## X-LoadOn-Arena: true
+## X-LoadOn-Battleground: true
+## X-LoadOn-Slash: /conquistador, /conquest, /cq
+
+ConquestDB.lua
+Conquistador.lua
