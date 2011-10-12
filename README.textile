@@ -1,22 +1,17 @@
-Have you ever wanted to find out what your Conquest points cap is going to be for the following week? Well, this addon will allow you to do just that.
+Have you ever wanted to find out what your Conquest Points cap is going to be for the following week? Well, this addon will allow you to do just that.
 
-Conquest points are rewarded to you for winning arena battles or rated battlegrounds.
+Conquest Points are rewarded to you for winning arena battles or rated battlegrounds.
 
 h2. Features 
 
-h4. Implemented
-
-* **Manual Conquest points cap calculation**<br /><p style="margin-left:2em">Use @/conquistador <personal rating>@. In addition, @/conquest@ and @/cq@ can also be used.</p>
-
-h4. Not Yet Implemented
-
-* **Automatic Conquest points cap calculation**
-* **Information added to the currency and maximum reward tooltips**
+* **Automatic Conquest Points cap calculation**<br /><p style="margin-left:2em">Mouseover the Conquest Points bar in World of Warcraft's PvP frame to view the updated tooltips.</p>
+* **Manual Conquest Points cap calculation**<br /><p style="margin-left:2em">Use @/conquistador <personal rating>@. In addition, @/conquest@ and @/cq@ can also be used.</p>
+* **Highest personal ratings reset**<br /><p style="margin-left:2em">If, for any reason, the personal ratings displayed in the tooltips have become incorrect, you may reset them using @/cq reset@.</p>
 
 h2. Known Issues and Limitations
 
 * **High memory usage**<br /><p style="margin-left:2em">This is necessary to ensure the accuracy of the calculations in the absence of having the actual mathematical formula used by Blizzard. I may try to reverse engineer their formula at some point in the future.</p>
-* **Incorrect highest personal rating**<br /><p style="margin-left:2em">If at any point your computer/game client crashes or is shutdown improperly, your highest personal rating attained for the week may become inaccurate.</p>
+* **Incorrect highest personal ratings**<br /><p style="margin-left:2em">If at any point your computer/game client crashes or is shutdown improperly, your highest personal ratings attained for the week may become inaccurate. This will also be the case if you've played any rated games with the addon disabled or while on another computer.</p>
 
 h2. Suggestions and Feedback
 
