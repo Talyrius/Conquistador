@@ -1,8 +1,8 @@
---[[------------------------------------------------------------------------------------------------
+--[[--------------------------------------------------------------------------------------------------------------------
 	Conquistador - Calculates your Conquest Points cap.
 	Copyright © 2011 GameMaster128
 	All rights reserved.
---]]------------------------------------------------------------------------------------------------
+--]]--------------------------------------------------------------------------------------------------------------------
 
 local addonName, ns = ...
 
@@ -39,7 +39,7 @@ local function GetConquestPointCap(rating, ctype)
 	return ns.ConquestDB[rating][ctype]
 end
 
-----------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 
 local Conquistador = CreateFrame("Frame")
 Conquistador:SetScript("OnEvent", function(self, event, ...)
@@ -49,14 +49,10 @@ Conquistador:SetScript("OnEvent", function(self, event, ...)
 end)
 Conquistador:RegisterEvent("ADDON_LOADED")
 
-
-
 function Conquistador:ADDON_LOADED(_, addon)
 	if addon ~= addonName then
 		return
 	end
-
-	VerifyDB(self)
 
 	self:UnregisterEvent("ADDON_LOADED")
 	self.ADDON_LOADED = nil
@@ -159,7 +155,7 @@ function Conquistador:PLAYER_ENTERING_WORLD()
 	end
 end
 
-----------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 
 SLASH_CONQUISTADOR1 = "/conquistador"
 SLASH_CONQUISTADOR2 = "/conquest"

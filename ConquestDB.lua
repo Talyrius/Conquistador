@@ -1,9 +1,9 @@
---[[------------------------------------------------------------------------------------------------
+--[[--------------------------------------------------------------------------------------------------------------------
 	This table was painstakingly populated, manually, using the new conquest point calculator found
 	within the PvP section of the character profiles on Battle.Net's WoW site. This was the perfect
 	oppurtunity for Blizzard to share their new formula. However, they decided to obfuscate it by
 	placing it within a server-side script.
---]]------------------------------------------------------------------------------------------------
+--]]--------------------------------------------------------------------------------------------------------------------
 
 local _, ns = ...
 
