@@ -1,0 +1,4 @@
+package-as: Conquistador
+
+ignore:
+    - README.textile
