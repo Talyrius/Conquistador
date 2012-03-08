@@ -1,6 +1,6 @@
 --[[--------------------------------------------------------------------------------------------------------------------
-	Conquistador - Calculates your Conquest Points cap.
-	Copyright © 2011 GameMaster128
+	Conquistador - Calculates your weekly Conquest Points cap.
+	Copyright © 2012 Talyrius
 	All rights reserved.
 --]]--------------------------------------------------------------------------------------------------------------------
 

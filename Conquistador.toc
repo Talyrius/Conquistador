@@ -1,11 +1,11 @@
 ## Interface: 40300
 
 ## Title: Conquistador
-## Notes: Calculates your Conquest Points cap.
-## Author: GameMaster128
+## Notes: Calculates your weekly Conquest Points cap.
+## Author: Talyrius
 ## Version: @project-version@
 ## X-Date: @project-date-iso@
-## X-Copyright: Copyright © 2011 GameMaster128
+## X-Copyright: Copyright © 2012 Talyrius
 ## X-License: All Rights Reserved
 ## X-Website: http://wow.curseforge.com/addons/conquistador/
 ## X-WoWI-ID: 17308
