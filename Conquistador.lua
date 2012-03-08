@@ -39,6 +39,47 @@ local function GetConquestPointCap(rating, ctype)
 	return ns.ConquestDB[rating][ctype]
 end
 
+local function GetServerOffset()
+	local serverHour, serverMinute = GetGameTime()
+	local localHour, localMinute = tonumber(date("%H")), tonumber(date("%M"))
+	local serverTime = serverHour + serverMinute / 60
+	local localTime = localHour + localMinute / 60
+	local offset = floor((serverTime - localTime) * 1000 + 0.5) / 1000
+
+	if offset >= 12 then
+		offset = offset - 24
+	elseif offset < -12 then
+		offset = offset + 24
+	end
+	
+	return offset
+end
+
+local function GetNextWeeklyResetTime()
+	local region = GetCVar("portal"):upper()
+	local resetDay = {}
+	
+	if region == "US" then
+		resetDay["2"] = true -- Tuesday
+	elseif region == "EU" then
+		resetDay["3"] = true -- Wednesday
+	elseif region == "CN" or region == "KR" or region == "TW" then
+		resetDay["4"] = true -- Thursday
+	else
+		resetDay["2"] = true -- Tuesday?
+	end
+	
+	local offset = GetServerOffset() * 3600
+	local resetTime = GetQuestResetTime()
+	local dailyReset = time() + resetTime
+	
+	while not resetDay[date("%w", dailyReset + offset)] do
+		dailyReset = dailyReset + 24 * 3600
+	end
+	
+	return dailyReset
+end
+
 ------------------------------------------------------------------------------------------------------------------------
 
 local Conquistador = CreateFrame("Frame")
@@ -93,6 +134,17 @@ function Conquistador:PLAYER_LOGIN()
 			
 			GameTooltip:AddDoubleLine(" -"..FROM_RATEDBG, format("(%d) %d", self.db.personalBGRating, GetConquestPointCap(self.db.personalBGRating, "RBG")), 1, 1, 1, 1, 1, 1)
 			GameTooltip:AddDoubleLine(" -"..FROM_ARENA, format("(%d) %d", self.db.personalArenaRating, GetConquestPointCap(self.db.personalArenaRating, "ARENA")), 1, 1, 1, 1, 1, 1)
+			GameTooltip:AddLine(" ")
+			
+			local timeFmt
+			if GetCVarBool("timeMgrUseMilitaryTime") then
+				timeFmt = "%A - %H:%M"
+			else
+				timeFmt = "%A - %I:%M %p"
+			end
+			
+			GameTooltip:AddDoubleLine("Next Reset", date(timeFmt, GetNextWeeklyResetTime()), nil, nil, nil, 1, 1, 1)
+			GameTooltip:AddLine(format("The new week starts in %s.", SecondsToTime(GetNextWeeklyResetTime() - time(), nil, 1)), 1, 1, 1)
 			
 			GameTooltip:Show()
 		end)
