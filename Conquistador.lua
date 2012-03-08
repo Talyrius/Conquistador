@@ -8,23 +8,39 @@ local addonName, ns = ...
 
 local currencyName = GetCurrencyInfo(CONQUEST_CURRENCY)
 local currencyLink = GetCurrencyLink(CONQUEST_CURRENCY)
+local defaultsDBPC = {
+	["personalBGRating"] = 0,
+	["personalArenaRating"] = 0,
+}
 
 local function Print(...)
 	print("|cFF33FF99Conquistador|r:", ...)
 end
 
-local function VerifyDB(self)
-	ConquistadorDBPC = ConquistadorDBPC or {}
-	self.db = ConquistadorDBPC
-	
-	if self.db.personalBGRating == nil or self.db.personalArenaRating == nil then
-		self.db = {
-			personalBGRating = 0,
-			personalArenaRating = 0
-		}
+local function copyTable(src, dst)
+	if type(src) ~= "table" then
+		return {}
 	end
 	
-	return self
+	if type(dst) ~= "table" then
+		dst = {}
+	end
+	
+	for k, v in pairs(src) do
+		if type(v) == "table" then
+			dst[k] = copyTable(v, dst[k])
+		elseif type(v) ~= type(dst[k]) then
+			dst[k] = v
+		end
+	end
+	
+	for k, v in pairs(dst) do
+		if type(src[k]) == nil then
+			dst[k] = nil
+		end
+	end
+	
+	return dst
 end
 
 local function GetConquestPointCap(rating, ctype)
@@ -90,11 +106,14 @@ Conquistador:SetScript("OnEvent", function(self, event, ...)
 end)
 Conquistador:RegisterEvent("ADDON_LOADED")
 
-function Conquistador:ADDON_LOADED(_, addon)
+function Conquistador:ADDON_LOADED(event, addon)
 	if addon ~= addonName then
 		return
 	end
-
+	
+	self.db = copyTable(defaultsDBPC, ConquistadorDBPC)
+	ConquistadorDBPC = self.db
+	
 	self:UnregisterEvent("ADDON_LOADED")
 	self.ADDON_LOADED = nil
 
@@ -172,8 +191,6 @@ function Conquistador:PLAYER_LOGIN()
 end
 
 function Conquistador:PLAYER_ENTERING_WORLD()
-	VerifyDB(self)
-	
 	local arenaActive, rbgActive = false, false
 
 	for i = 1, MAX_ARENA_TEAMS do
@@ -217,7 +234,8 @@ function SlashCmdList.CONQUISTADOR(msg, editbox)
 	local rating = tonumber(msg)
 	
 	if msg:lower() == "reset" then
-		Conquistador.db = {}
+		ConquistadorDBPC = nil
+		ConquistadorDBPC = copyTable(defaultsDBPC, ConquistadorDBPC)
 		Conquistador:PLAYER_ENTERING_WORLD()
 	elseif not rating or rating < 1 then
 		Print("You must specify a valid personal rating.")
